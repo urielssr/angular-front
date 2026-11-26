@@ -1,0 +1,124 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      @if (isEdit) {
+        <h1 class="form-title">
+          <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Editar Producto
+        </h1>
+      } @else {
+        <h1 class="form-title">
+          <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          Nuevo Producto
+        </h1>
+      }
+      <p class="form-subtitle">Completa los campos para {{ isEdit ? 'actualizar' : 'crear' }} un producto</p>
+    </div>
+
+    @if (error) {
+      <div class="alert alert-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ error }}</span>
+        <button class="alert-close" (click)="error = null">&times;</button>
+      </div>
+    }
+
+    @if (isLoading && !isEdit) {
+      <div class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+    }
+
+    <form class="form-body" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="name" class="form-label">
+          <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          Nombre del Producto
+        </label>
+        <input 
+          type="text" 
+          id="name"
+          [(ngModel)]="product.name"
+          name="name"
+          placeholder="Ej: Laptop HP Pavilion"
+          class="form-input"
+          [class.input-error]="!product.name?.trim() && error?.includes('nombre')"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="form-label">
+          <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="17" y1="10" x2="3" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="17" y1="18" x2="3" y2="18"></line>
+          </svg>
+          Descripción
+        </label>
+        <textarea 
+          id="description"
+          [(ngModel)]="product.description"
+          name="description"
+          placeholder="Describe las características principales del producto..."
+          class="form-input form-textarea"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price" class="form-label">
+          <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          Precio
+        </label>
+        <div class="price-input-wrapper">
+          <span class="price-prefix">$</span>
+          <input 
+            type="number" 
+            id="price"
+            [(ngModel)]="product.price"
+            name="price"
+            placeholder="0.00"
+            class="form-input form-price"
+            min="0"
+            step="0.01"
+            [class.input-error]="(product.price === undefined || product.price === null || product.price < 0) && error?.includes('precio')"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          @if (isLoading) {
+            <div class="btn-spinner"></div>
+            Procesando...
+          } @else {
+            {{ isEdit ? 'Actualizar' : 'Crear' }} Producto
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

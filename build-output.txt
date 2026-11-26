@@ -1,0 +1,12 @@
+﻿Γ¥» Building...
+Γ£ö Building...
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-MOF6J7MM.js    | main          | 481.79 kB |               125.30 kB
+styles-AVJCIN57.css | styles        |   1.20 kB |               491 bytes
+
+                    | Initial total | 482.98 kB |               125.79 kB
+
+Application bundle generation complete. [2.558 seconds] - 2026-11-26T01:24:54.800Z
+
+Output location: C:\Users\UXG\Downloads\Proyects\Angular-Back-end-products\angular-front\dist\angular-front
+

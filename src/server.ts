@@ -66,3 +66,11 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
 export const reqHandler = createNodeRequestHandler(app);
+
+/**
+ * Provides parameter values for prerendering routes with parameters.
+ * Returns empty array to skip prerendering dynamic routes (edit/:id, detail/:id).
+ */
+export function getPrerenderParams(_route: string): Promise<string[][]> {
+  return Promise.resolve([]);
+}

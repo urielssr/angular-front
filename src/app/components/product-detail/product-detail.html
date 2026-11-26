@@ -1,0 +1,74 @@
+<div class="detail-container">
+  @if (loading) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Cargando detalles del producto...</p>
+    </div>
+  }
+
+  @if (error && !loading) {
+    <div class="error-container">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <p>{{ error }}</p>
+      <button class="btn-back" (click)="goBack()">Volver</button>
+    </div>
+  }
+
+  @if (product && !loading) {
+    <div class="detail-card">
+      <div class="card-gradient"></div>
+      
+      <div class="card-content">
+        <div class="back-link">
+          <button class="btn-back" (click)="goBack()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Volver
+          </button>
+        </div>
+
+        <div class="product-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+          </svg>
+          Detalle del Producto
+        </div>
+
+        <div class="product-info">
+          <h1 class="product-name">{{ product.name }}</h1>
+          <div class="product-price">{{ product.price | currency:'USD':'symbol':'1.0-0' }}</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="description-section">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="17" y1="10" x2="3" y2="10"></line>
+              <line x1="21" y1="6" x2="3" y2="6"></line>
+              <line x1="21" y1="14" x2="3" y2="14"></line>
+              <line x1="17" y1="18" x2="3" y2="18"></line>
+            </svg>
+            Descripción
+          </h3>
+          <p class="description-text">{{ product.description || 'Sin descripción disponible' }}</p>
+        </div>
+
+        <div class="card-actions">
+          <a [routerLink]="['/edit', product.id]" class="btn-edit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Editar Producto
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+</div>

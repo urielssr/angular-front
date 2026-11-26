@@ -232,7 +232,7 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>Hello, {{ title() }}</h1>
+      <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
@@ -341,4 +341,13 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet />
+<app-navbar></app-navbar>
+<app-toast></app-toast>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2024 ProductManager. Desarrollado con Angular + Spring Boot.</p>
+</footer>
